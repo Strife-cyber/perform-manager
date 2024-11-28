@@ -77,7 +77,7 @@ export const getActionEmployee = async (req, res) => {
         const action = await models.Action.findByPk(id, {
             include: {
                 model: models.Employee,
-                attributes: ['id', 'user_id', 'name', 'department'], // Adjust attributes as needed
+                attributes: ['id', 'user_id', 'department'], // Adjust attributes as needed
             },
         });
         if (!action) {

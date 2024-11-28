@@ -6,6 +6,9 @@ import * as PerformanceController from './controllers/performance_controller.js'
 import * as RatingController from './controllers/rating_controller.js';
 import * as SupportController from './controllers/support_controller.js';
 import * as ActionController from './controllers/action_controller.js';
+import * as GoalController from './controllers/goal_controller.js';
+import * as AdminController from './controllers/admin_controller.js';
+import * as NotificationController from './controllers/notification_controller.js';
 
 const routes = express.Router();
 
@@ -94,7 +97,6 @@ routes.delete('/supports', SupportController.deleteSupport);
 routes.get('/supports/uploader', SupportController.getSupportUploader)
 
 
-/// Not Tested And Admin, Goal, and Notifications Routes needed
 // Action Routes
 // Action CRUB routes
 routes.get('/actions', ActionController.getAllActions);
@@ -106,7 +108,39 @@ routes.delete('/actions', ActionController.deleteAction);
 // Routes for fetching related data
 routes.get('/actions/employee', ActionController.getActionEmployee);
 routes.get('/actions/goal', ActionController.getActionGoal);
-routes.get('/actions/by/goal', ActionController.getActionsByGoal);
-routes.get('/actions/by/employee', ActionController.getActionsByEmployee);
+
+
+// Goal Routes
+// Goal CRUD routes
+routes.get('/goals', GoalController.getAllGoals);
+routes.get('/goal', GoalController.getGoal);
+routes.post('/goals', GoalController.createGoal);
+routes.put('/goals', GoalController.updateGoal);
+routes.delete('/goals', GoalController.deleteGoal);
+
+// Routes for fetching related data
+routes.get('/goals/action', GoalController.getGoalAction);
+routes.get('/goals/employee', GoalController.getGoalEmployee);
+routes.get('/goals/controller', GoalController.getGoalController);
+
+
+// Admin Routes
+// Admin CRUD routes
+routes.get('/admins', AdminController.getAllAdmins);
+routes.get('/admin', AdminController.getAdmin);
+routes.post('/admins', AdminController.createAdmin);
+routes.put('/admins', AdminController.updateAdmin);
+routes.delete('/admins', AdminController.deleteAdmin);
+
+// Routes for fetching related data
+routes.get('/admins/user', AdminController.getAdminUser);
+
+
+// Notification Routes
+routes.get('/notifications', NotificationController.getNotificationsByUser);
+routes.post('/notifications', NotificationController.createNotification);
+routes.put('/notifications', NotificationController.markAsRead);
+routes.get('/notifications/unread', NotificationController.getUnreadNotifications);
+routes.get('/notifications/read', NotificationController.getReadNotifications);
 
 export default routes;
