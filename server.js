@@ -1,8 +1,11 @@
+import fs from 'fs';
 import cors from 'cors';
+import path from 'path';
 import express from 'express';
 import readline from 'readline';
 import routes from './routes.js';
 import bodyParser from 'body-parser';
+import upload from './services/storage_service.js';
 
 
 const app = express();
@@ -22,6 +25,27 @@ app.use(express.urlencoded({ extended: true })); // Parse URL-encoded bodies
 
 // Add API routes
 app.use('/api', routes);
+
+
+// More Routes
+app.post('/upload', upload.single('file'), (req, res) => {
+    if(!req.file) {
+        return res.status(400).send('No file uploaded');
+    }
+    const filepath = path.join('uploads', req.file.filename);
+    res.status(200).json({ message: 'File uploaded successfully', path: filepath });
+})
+
+app.get('/download', (req, res) => {
+    const filepath = req.query.filepath;
+
+    if (!filepath || !fs.existsSync(filepath)){
+        return res.status(404).send('File not found');
+    }
+    res.download(filepath, (err) => {
+        if (err) console.error('Error sending file:', err)
+    })
+})
 
 // Function to listen for 'q' to quit
 function listenForQuitCommand() {
