@@ -154,3 +154,53 @@ export const profile = async (req, res) => {
         res.status(500).json({ message: 'Internal server error. Please try again later.' });
     }
 };
+
+export const role = async (req, res) => {
+    const { id } = req.query;
+
+    try {
+        // Ensure id is a number
+        const userId = Number(id);
+        if (isNaN(userId)) {
+            return res.status(400).json({ message: "Invalid user ID" });
+        }
+
+        const roles = ['admin', 'controller', 'employee'];
+        let role = null; // Default role to null
+
+        // Fetch all data at once
+        const [admins, controllers, employees] = await Promise.all([
+            models.Admin.findAll({ attributes: ['user_id'] }),
+            models.Controller.findAll({ attributes: ['user_id'] }),
+            models.Employee.findAll({ attributes: ['user_id'] })
+        ]);
+
+        // Create lookup maps for faster checking
+        const adminMap = new Map(admins.map(admin => [admin.user_id, 0])); // 0 for admin
+        const controllerMap = new Map(controllers.map(controller => [controller.user_id, 1])); // 1 for controller
+        const employeeMap = new Map(employees.map(employee => [employee.user_id, 2])); // 2 for employee
+
+        // Check if the user_id exists in any of the maps
+        if (adminMap.has(userId)) {
+            role = adminMap.get(userId); // Role 0 for admin
+        } else if (controllerMap.has(userId)) {
+            role = controllerMap.get(userId); // Role 1 for controller
+        } else if (employeeMap.has(userId)) {
+            role = employeeMap.get(userId); // Role 2 for employee
+        }
+
+        // If no role was found, return a 404 response
+        if (role === null) {
+            return res.status(404).json({ message: "User not found or role not assigned" });
+        }
+
+        // Return the found role
+        return res.status(200).json({ role: roles[role] });
+
+    } catch (error) {
+        // Handle any unexpected errors
+        console.error(error);
+        return res.status(500).json({ message: "Internal server error" });
+    }
+};
+

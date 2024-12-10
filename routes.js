@@ -9,6 +9,7 @@ import * as ActionController from './controllers/action_controller.js';
 import * as GoalController from './controllers/goal_controller.js';
 import * as AdminController from './controllers/admin_controller.js';
 import * as NotificationController from './controllers/notification_controller.js';
+import sendMail from './controllers/email_controller.js';
 
 const routes = express.Router();
 
@@ -25,6 +26,7 @@ routes.post('/users/login', UserController.login)
 routes.get('/users/logout', UserController.logout)
 routes.get('/users/status', UserController.authenticated)
 routes.get('/users/profile', UserController.profile)
+routes.get('/users/role', UserController.role)
 
 
 
@@ -142,5 +144,8 @@ routes.post('/notifications', NotificationController.createNotification);
 routes.put('/notifications', NotificationController.markAsRead);
 routes.get('/notifications/unread', NotificationController.getUnreadNotifications);
 routes.get('/notifications/read', NotificationController.getReadNotifications);
+
+// Routes for sending emails
+routes.post('/mail', sendMail);
 
 export default routes;
