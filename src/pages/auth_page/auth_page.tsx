@@ -2,8 +2,10 @@ import React, { useState } from 'react';
 import TextFieldComponent from '../../components/text_field_component';
 import StandardButton from '../../components/standard_button';
 import useUser, { User } from '../../requests/user_requests';
+import { useNavigate } from 'react-router-dom';
 
 const AuthPage: React.FC = () => {
+  const navigate = useNavigate();
   const [isLogin, setIsLogin] = useState(true);
   const [userData, setUserData] = useState<User>({
     name: '',
@@ -22,6 +24,7 @@ const AuthPage: React.FC = () => {
       try {
         await register_user({ name, email, password });
         alert('Registration successful!');
+        navigate('/dashboard');
       } catch (error) {
         alert('Error registering. Please try again.');
         console.error(error);
@@ -37,6 +40,7 @@ const AuthPage: React.FC = () => {
       try {
         await login_user(email, password);
         alert('Login successful!');
+        navigate('/dashboard');
       } catch (error) {
         alert('Error logging in. Please try again.');
         console.error(error);
