@@ -1,7 +1,11 @@
 import React, { useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 
-const NavigationBar: React.FC = () => {
+interface NavigationBarProps {
+  onNavigate: (section: string) => void;
+}
+
+const NavigationBar: React.FC<NavigationBarProps> = ({ onNavigate }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const toggleMenu = () => {
@@ -19,7 +23,6 @@ const NavigationBar: React.FC = () => {
         transition: "all 0.3s ease-in-out", // Smooth transition
       }}
     >
-      {/* Brand Logo */}
       <a
         className="navbar-brand"
         href="#"
@@ -35,7 +38,6 @@ const NavigationBar: React.FC = () => {
         Dashboard
       </a>
 
-      {/* Toggle Button for Mobile Screens */}
       <button
         className="navbar-toggler"
         type="button"
@@ -52,7 +54,6 @@ const NavigationBar: React.FC = () => {
         <span className="navbar-toggler-icon"></span>
       </button>
 
-      {/* Collapsible Menu */}
       <div
         className={`collapse navbar-collapse ${isMenuOpen ? "mt-2 show" : ""}`}
         id="navbarNav"
@@ -66,17 +67,15 @@ const NavigationBar: React.FC = () => {
             gap: "1.5rem", // Add spacing between links
             fontSize: "1rem",
             fontWeight: "500",
-            marginRight: "20px"
+            marginRight: "20px",
           }}
         >
           <li className="nav-item">
             <a
               className="nav-link"
               href="#evaluations"
-              style={{
-                color: "black",
-                transition: "color 0.3s ease",
-              }}
+              onClick={() => onNavigate("evaluations")}
+              style={{ color: "black", transition: "color 0.3s ease" }}
               onMouseEnter={(e) => (e.currentTarget.style.color = "#007bff")}
               onMouseLeave={(e) => (e.currentTarget.style.color = "black")}
             >
@@ -87,10 +86,8 @@ const NavigationBar: React.FC = () => {
             <a
               className="nav-link"
               href="#feedback"
-              style={{
-                color: "black",
-                transition: "color 0.3s ease",
-              }}
+              onClick={() => onNavigate("feedback")}
+              style={{ color: "black", transition: "color 0.3s ease" }}
               onMouseEnter={(e) => (e.currentTarget.style.color = "#007bff")}
               onMouseLeave={(e) => (e.currentTarget.style.color = "black")}
             >
@@ -101,10 +98,8 @@ const NavigationBar: React.FC = () => {
             <a
               className="nav-link"
               href="#documents"
-              style={{
-                color: "black",
-                transition: "color 0.3s ease",
-              }}
+              onClick={() => onNavigate("documents")}
+              style={{ color: "black", transition: "color 0.3s ease" }}
               onMouseEnter={(e) => (e.currentTarget.style.color = "#007bff")}
               onMouseLeave={(e) => (e.currentTarget.style.color = "black")}
             >
@@ -115,10 +110,8 @@ const NavigationBar: React.FC = () => {
             <a
               className="nav-link"
               href="#goals"
-              style={{
-                color: "black",
-                transition: "color 0.3s ease",
-              }}
+              onClick={() => onNavigate("goals")}
+              style={{ color: "black", transition: "color 0.3s ease" }}
               onMouseEnter={(e) => (e.currentTarget.style.color = "#007bff")}
               onMouseLeave={(e) => (e.currentTarget.style.color = "black")}
             >

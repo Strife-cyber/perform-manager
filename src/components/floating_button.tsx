@@ -47,6 +47,7 @@ const FloatingButton: React.FC<FloatingButtonProps> = ({
         cursor: "pointer",
         fontWeight: "bold", // Optionally make the plus sign bold
         fontFamily: "Arial, sans-serif", // Consistent font family
+        zIndex: "1000"
       }}
       onMouseEnter={(e: React.MouseEvent) => {
         (e.currentTarget as HTMLButtonElement).style.backgroundColor = hoverColor; // Change color on hover
