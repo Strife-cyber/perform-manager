@@ -45,7 +45,7 @@ const LandingHeader = () => {
 
       {/* Actions: Icons + Login Button */}
       <div className="action d-flex align-items-center" style={{ display: 'flex', gap: '20px', width: isMobile? '100%':'33%', justifyContent: isMobile ? 'space-between' : 'flex-end' }}>
-        <CircularIcon icon='fas fa-envelope'/>
+        <CircularIcon action={() => navigate('/profile')} icon='fas fa-user'/>
         <CircularIcon icon='fas fa-map-marker-alt'/>
         <StandardButton placeholder='Get Started' onClickFunction={() => navigate('/auth')}/>
       </div>

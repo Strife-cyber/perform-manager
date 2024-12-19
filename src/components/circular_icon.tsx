@@ -5,13 +5,16 @@ interface CircularIconProps {
   color?: string; // The color for the circular border
   size?: number; // Optional size for the icon and circle (default is 50px)
   iconSize?: number; // Optional size for the icon itself (default is 36px)
+  action?: () => void
 }
 
-const CircularIcon: React.FC<CircularIconProps> = ({ icon, color='#007bff', size = 40, iconSize = 24 }) => {
+const CircularIcon: React.FC<CircularIconProps> = ({ icon, color='#007bff', size = 40, iconSize = 24, action = () => console.log('Icon clicked') }) => {
   const [hovered, setHovered] = useState(false);
 
   return (
     <div
+      onClick={action}
+
       style={{
         width: `${size}px`,
         height: `${size}px`,
