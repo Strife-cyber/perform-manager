@@ -1,0 +1,189 @@
+/* General container styles */
+.redirection-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #d7f7ff, #dffef5, #fff8d7, #ffd9d9);
+  background-size: 400% 400%;
+  animation: backgroundShift 10s ease infinite;
+  overflow: hidden;
+  position: relative;
+  font-family: "Montserrat", sans-serif;
+}
+
+/* Title and message styling */
+.title {
+  font-size: 3rem;
+  color: #00b4d8; /* Light blue */
+  font-weight: bold;
+  text-align: center;
+  animation: fadeIn 2s ease-in-out, pulse 3s infinite alternate;
+}
+
+.message {
+  font-size: 1.2rem;
+  color: #0096c7; /* Deeper light blue for readability */
+  margin: 1rem 0;
+  text-align: center;
+  animation: fadeIn 2.5s ease-in-out;
+}
+
+/* Home button */
+.home-button {
+  padding: 0.8rem 2rem;
+  font-size: 1rem;
+  font-weight: bold;
+  color: white;
+  background: linear-gradient(135deg, #6fffe9, #ffbb99); /* Light green to light orange */
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: transform 0.3s ease, background 0.3s ease, box-shadow 0.3s ease;
+  animation: fadeIn 3s ease-in-out, shake 5s infinite ease-in-out;
+}
+
+.home-button:hover {
+  background: linear-gradient(135deg, #53ffba, #ff9e6b); /* Brighter green-orange */
+  transform: scale(1.1) translateX(-50%);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+/* Animated shapes */
+.animated-shapes {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  overflow: hidden;
+  z-index: 0;
+}
+
+.circle,
+.triangle,
+.square {
+  position: absolute;
+  background: rgba(0, 200, 255, 0.3); /* Light cyan for all */
+  border-radius: 50%;
+  animation: moveShapes 15s linear infinite, morphShapes 10s ease infinite;
+}
+
+/* Circle animation */
+.circle {
+  width: 150px;
+  height: 150px;
+  top: 10%;
+  left: 20%;
+  background: rgba(0, 200, 255, 0.4);
+  animation-delay: 2s;
+}
+
+/* Triangle animation */
+.triangle {
+  width: 0;
+  height: 0;
+  border-left: 100px solid transparent;
+  border-right: 100px solid transparent;
+  border-bottom: 150px solid rgba(255, 178, 102, 0.6); /* Light orange */
+  top: 30%;
+  left: 60%;
+  transform: rotate(0deg);
+  animation: rotateShape 10s linear infinite, morphShapes 10s ease infinite;
+  animation-delay: 3s;
+}
+
+/* Square animation */
+.square {
+  width: 100px;
+  height: 100px;
+  top: 70%;
+  left: 40%;
+  transform: rotate(45deg);
+  background: rgba(153, 255, 204, 0.8); /* Light green */
+  animation-delay: 1s;
+}
+
+/* Keyframes */
+
+/* Background animation */
+@keyframes backgroundShift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* Fade-in effect */
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Pulse effect for the title */
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(1.05);
+  }
+}
+
+/* Move shapes in a circular motion */
+@keyframes moveShapes {
+  0% {
+    transform: translateY(0) translateX(0);
+  }
+  50% {
+    transform: translateY(50px) translateX(50px);
+  }
+  100% {
+    transform: translateY(0) translateX(0);
+  }
+}
+
+/* Rotate shapes */
+@keyframes rotateShape {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* Morphing shapes randomly */
+@keyframes morphShapes {
+  0%, 100% {
+    border-radius: 50%;
+  }
+  50% {
+    border-radius: 10%;
+  }
+}
+
+/* Button shake animation */
+@keyframes shake {
+  0%, 100% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(-5px);
+  }
+  50% {
+    transform: translateX(5px);
+  }
+}

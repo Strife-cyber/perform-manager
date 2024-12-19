@@ -1,6 +1,7 @@
 import React, { ReactNode, useEffect, useState } from "react";
 import { useAppContext } from "../context/context";
 import useUser from "../requests/user_requests";
+import RedirectionPage from "../pages/redirection/redirection_page";
 
 interface ProtectedRouteProps {
   children: ReactNode;
@@ -33,7 +34,7 @@ const IsControllerWare: React.FC<ProtectedRouteProps> = ({ children }) => {
     fetchRole();
   }, [userId, get_role]); // Add dependencies to the useEffect hook
 
-  return isController ? <>{children}</> : null; // Navigate to a new page here
+  return isController ? <>{children}</> : <RedirectionPage/>; // Navigate to a new page here
 };
 
 export default IsControllerWare;
