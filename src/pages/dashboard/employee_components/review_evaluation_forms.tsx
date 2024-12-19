@@ -95,7 +95,7 @@ const ReviewEvaluationForms: React.FC = () => {
         minHeight: "100vh",
       }}
     >
-      <h1 style={{ fontSize: "2.2rem", marginBottom: "2.5rem", color: "#333", fontFamily: "Montag" }}>
+      <h1 style={{ fontSize: "2.2rem", marginBottom: "2.5rem", color: "#333", fontFamily: "Montaga" }}>
         Review Evaluation Forms
       </h1>
 

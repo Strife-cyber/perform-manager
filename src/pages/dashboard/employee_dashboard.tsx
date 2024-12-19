@@ -10,6 +10,7 @@ import React, { useEffect, useState } from "react";
 import Cookies from "js-cookie";
 import ReviewEvaluationForms from "./employee_components/review_evaluation_forms";
 import NavigationBar from "./employee_components/navigation_bar";
+import OtherDocuments from "./employee_components/other_documents";
 
 const EmployeeDashboard: React.FC = () => {
     const [currentSection, setCurrentSection] = useState(() => 
@@ -29,7 +30,7 @@ const EmployeeDashboard: React.FC = () => {
             case "personal-progress":
                 return <div>Track personal progress i don't know how</div>
             case "other-documents":
-                return <div>View and download various support documents</div>
+                return <OtherDocuments/>
             default:
                 return <div>Select a section to get started.</div>;
         }

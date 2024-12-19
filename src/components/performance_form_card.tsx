@@ -3,7 +3,7 @@ import { Performance } from "../requests/performance_requests";
 import useUser from "../requests/user_requests";
 import DocumentViewer from "./doc_viewer_component";
 import useFile from "../requests/file_requests";
-import mammoth from "mammoth";
+import { downloadFileToBrowser, fetchDocumentUri } from "./helper_functions";
 
 interface PerformanceFormCardProps {
   form: Performance;
@@ -46,52 +46,6 @@ const PerformanceFormCard: React.FC<PerformanceFormCardProps> = ({
     fetchUserProfile();
   }, [form.created_by, get_user_profile]);
 
-  const downloadFileToBrowser = async (fileBlob: Blob, fileName: string) => {
-    const fileURL = URL.createObjectURL(fileBlob);
-
-    // Create a temporary <a> element
-    const link = document.createElement("a");
-    link.href = fileURL;
-    link.download = fileName; // Set the desired file name for the download
-    document.body.appendChild(link);
-
-    // Programmatically click the link to trigger the download
-    link.click();
-
-    // Clean up by removing the link and revoking the object URL
-    document.body.removeChild(link);
-    URL.revokeObjectURL(fileURL);
-  };
-
-  const fetchDocumentUri = async (path: string) => {
-    try {
-      const fileBlob = await downloadFile(path);
-      if (fileBlob && fileBlob.size > 0) {
-        if (
-          fileBlob.type ===
-          "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
-        ) {
-          const arrayBuffer = await fileBlob.arrayBuffer();
-          mammoth
-            .convertToHtml({ arrayBuffer })
-            .then((result) => {
-              setDocumentHtml(result.value);
-            })
-            .catch((err) => {
-              console.error("Error converting Word file:", err);
-            });
-        } else {
-          const fileURL = URL.createObjectURL(fileBlob);
-          setDocumentUri(fileURL);
-        }
-      } else {
-        console.error("Received an empty file or Blob");
-      }
-    } catch (error) {
-      console.error("Error fetching document URI:", error);
-    }
-  };
-
   const handleSingleClick = () => {
     if (onClick) {
       onClick();
@@ -103,7 +57,7 @@ const PerformanceFormCard: React.FC<PerformanceFormCardProps> = ({
       clearTimeout(clickTimeout);
       setClickTimeout(null);
     }
-    await fetchDocumentUri(form.path);
+    await fetchDocumentUri(form.path, setDocumentHtml, setDocumentUri);
     setOpenViewer(true);
   };
 

@@ -41,7 +41,7 @@ const DocumentViewer: React.FC<DocumentViewerProps> = ({
       >
         {/* Close Button */}
         <button
-          onClick={onClose}
+          onClick={(event) => {event.stopPropagation(); onClose()}}
           style={{
             position: "absolute",
             top: "1rem",
