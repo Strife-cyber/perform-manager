@@ -11,6 +11,7 @@ import StandardButton from "../../../components/standard_button";
 import useFile from "../../../requests/file_requests";
 import { Performance, usePerformance } from "../../../requests/performance_requests";
 import { useAppContext } from "../../../context/context";
+import { Toast } from "../../../components/toast_component";
 
 const CreateEvaluationForm: React.FC = () => {
   const { uploadFile } = useFile();
@@ -54,12 +55,12 @@ const CreateEvaluationForm: React.FC = () => {
 
   const assignForm = async (): Promise<void> => {
     if (!uploadedFiles.length) {
-      console.error("No files uploaded!");
+      Toast.warning("No files uploaded!");
       return;
     }
 
     if (!selectedEmployees) {
-      console.error("No employee selected!");
+      Toast.warning("No employee selected!")
       return;
     }
 
@@ -77,7 +78,7 @@ const CreateEvaluationForm: React.FC = () => {
       };
 
       await create_performance(performance);
-      console.log("Performance evaluation created:", performance);
+      Toast.success(`Performance evaluation created: ${performance}`)
       setShowModal(false); // Close modal after successful submission
     } catch (error) {
       console.error("Error creating performance evaluation:", error);

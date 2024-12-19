@@ -21,6 +21,7 @@ const NavigationBar: React.FC<NavigationBarProps> = ({ onNavigate }) => {
         padding: "1rem",
         boxShadow: "0px 4px 8px rgba(0, 0, 0, 0.1)", // Subtle shadow for elegance
         transition: "all 0.3s ease-in-out", // Smooth transition
+        fontFamily: "Montaga"
       }}
     >
       <a

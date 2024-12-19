@@ -1,4 +1,4 @@
-import axios from "axios";
+import api from "../api";
 
 export interface Ratings {
   performance_form: string;
@@ -13,7 +13,7 @@ const useRatings = () => {
   // Get all ratings
   const getAllRatings = async (): Promise<Ratings[]> => {
     try {
-      const response = await axios.get(baseUrl);
+      const response = await api.get(baseUrl);
       return response.data;
     } catch (error) {
       console.error("Error fetching all ratings:", error);
@@ -24,7 +24,7 @@ const useRatings = () => {
   // Get a specific rating by ID
   const getRating = async (id: string): Promise<Ratings> => {
     try {
-      const response = await axios.get(`/rating`, { params: { id } });
+      const response = await api.get(`/rating`, { params: { id } });
       return response.data;
     } catch (error) {
       console.error("Error fetching rating by ID:", error);
@@ -35,7 +35,7 @@ const useRatings = () => {
   // Get the performance form associated with a rating
   const getRatingPerformance = async (id: string): Promise<any> => {
     try {
-      const response = await axios.get(`${baseUrl}/performance`, { params: { id } });
+      const response = await api.get(`${baseUrl}/performance`, { params: { id } });
       return response.data;
     } catch (error) {
       console.error("Error fetching performance form for rating:", error);
@@ -46,7 +46,7 @@ const useRatings = () => {
   // Get the employee who submitted a rating
   const getRatingEmployee = async (id: string): Promise<any> => {
     try {
-      const response = await axios.get(`${baseUrl}/employee`, { params: { id } });
+      const response = await api.get(`${baseUrl}/employee`, { params: { id } });
       return response.data;
     } catch (error) {
       console.error("Error fetching employee for rating:", error);
@@ -57,7 +57,7 @@ const useRatings = () => {
   // Create a new rating
   const createRating = async (ratingData: Ratings): Promise<Ratings> => {
     try {
-      const response = await axios.post(baseUrl, ratingData);
+      const response = await api.post(baseUrl, ratingData);
       return response.data;
     } catch (error) {
       console.error("Error creating new rating:", error);
@@ -68,7 +68,7 @@ const useRatings = () => {
   // Update a rating by ID
   const updateRating = async (id: string, ratingData: Ratings): Promise<Ratings> => {
     try {
-      const response = await axios.put(baseUrl, ratingData, { params: { id } });
+      const response = await api.put(baseUrl, ratingData, { params: { id } });
       return response.data;
     } catch (error) {
       console.error("Error updating rating:", error);
@@ -79,7 +79,7 @@ const useRatings = () => {
   // Delete a rating by ID
   const deleteRating = async (id: string): Promise<{ message: string }> => {
     try {
-      const response = await axios.delete(baseUrl, { params: { id } });
+      const response = await api.delete(baseUrl, { params: { id } });
       return response.data;
     } catch (error) {
       console.error("Error deleting rating:", error);

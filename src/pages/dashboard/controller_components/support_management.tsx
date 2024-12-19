@@ -8,6 +8,7 @@ import { useAppContext } from "../../../context/context";
 import * as mammoth from "mammoth"; // Import mammoth for handling Word files
 import DocumentViewer from "../../../components/doc_viewer_component"; // Import the new component
 import DocumentCard from "../../../components/document_card";
+import { Toast } from "../../../components/toast_component";
 
 const SupportManagement: React.FC = () => {
   const { userId } = useAppContext();
@@ -44,18 +45,18 @@ const SupportManagement: React.FC = () => {
       const data = await getAllSupports();
       setSupports(data);
     } catch (error) {
-      console.error("Error fetching supports:", error);
+      Toast.error(`Error fetching supports: ${error}`)
     }
   };
 
   const handleFileUpload = (files: File[]): void => {
     setUploadedFiles(files);
-    console.log("Uploaded files:", files);
+    Toast.info(`Uploaded files: ${files}`)
   };
 
   const uploadSupport = async () => {
     if (!uploadedFiles.length) {
-      console.error("No files uploaded!");
+      Toast.error("No files uploaded!");
       return;
     }
 
@@ -65,9 +66,9 @@ const SupportManagement: React.FC = () => {
 
       setNewSupport({ ...newSupport, path: filepath, uploaded_by: userId! });
       await createSupport(newSupport);
-      console.log("Support document uploaded", newSupport);
+      Toast.success(`Support document uploaded: ${newSupport.title}`)
     } catch (error) {
-      console.error("Error uploading support document:", error);
+      Toast.error(`Error uploading support document: ${error}`)
     }
   };
 
@@ -84,7 +85,7 @@ const SupportManagement: React.FC = () => {
               setDocumentHtml(result.value); // Store the HTML content for rendering
             })
             .catch((err) => {
-              console.error("Error converting Word file:", err);
+              Toast.error("Error converting Word file:", err);
             });
         } else {
           // For non-Word files, create a Blob URL
@@ -92,10 +93,10 @@ const SupportManagement: React.FC = () => {
           setDocumentUri(fileURL); // Set the URI for rendering non-Word files
         }
       } else {
-        console.error("Received an empty file or Blob");
+        Toast.error("Received an empty file or Blob");
       }
     } catch (error) {
-      console.error("Error fetching document URI:", error);
+      Toast.error(`Error fetching document URI: ${error}`);
     }
   };
 

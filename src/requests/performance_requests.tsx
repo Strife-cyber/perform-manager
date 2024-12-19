@@ -1,6 +1,7 @@
 import api from "../api";
 
 export interface Performance {
+    id?: string;
     title: string;
     description: string;
     path: string;

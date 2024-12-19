@@ -4,22 +4,31 @@
 /// • Upload supporting documents (e.g., meeting notes, project reports).
 /// • Set goals and objectives for employees.
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import NavigationBar from "./controller_components/navigation_bar";
 import PerformanceEvaluations from "./controller_components/performance_evaluations";
 import SupportManagement from "./controller_components/support_management";
+import Cookies from "js-cookie";
 
 const ControllerDashboard: React.FC = () => {
-  const [currentSection, setCurrentSection] = useState("evaluations");
+  // Retrieve the saved section from cookies, default to "evaluations"
+  const [currentSection, setCurrentSection] = useState(() => 
+    Cookies.get("currentSection") || "evaluations"
+  );
+
+  // Update the cookie whenever `currentSection` changes
+  useEffect(() => {
+    Cookies.set("currentSection", currentSection);
+  }, [currentSection]);
 
   const renderSection = () => {
     switch (currentSection) {
       case "evaluations":
-        return <PerformanceEvaluations/>;
+        return <PerformanceEvaluations />;
       case "feedback":
         return <div>Provide feedback and ratings on employee performance.</div>;
       case "documents":
-        return <SupportManagement/>;
+        return <SupportManagement />;
       case "goals":
         return <div>Set goals and objectives for employees.</div>;
       default:

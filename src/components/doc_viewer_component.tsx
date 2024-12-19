@@ -4,12 +4,14 @@ interface DocumentViewerProps {
   documentHtml: string | null;
   documentUri: string | null;
   onClose: () => void;
+  downloadFunction?: () => void; // Optional download function
 }
 
 const DocumentViewer: React.FC<DocumentViewerProps> = ({
   documentHtml,
   documentUri,
   onClose,
+  downloadFunction,
 }) => {
   return (
     <div
@@ -26,37 +28,87 @@ const DocumentViewer: React.FC<DocumentViewerProps> = ({
         zIndex: 1000,
       }}
     >
-      <div style={{ position: "relative", width: "80%", height: "80%" }}>
+      <div
+        style={{
+          position: "relative",
+          width: "80%",
+          height: "80%",
+          backgroundColor: "#fff",
+          borderRadius: "10px",
+          boxShadow: "0 4px 8px rgba(0, 0, 0, 0.2)",
+          overflow: "hidden",
+        }}
+      >
+        {/* Close Button */}
         <button
           onClick={onClose}
           style={{
             position: "absolute",
             top: "1rem",
             right: "1rem",
-            backgroundColor: "#fff",
+            backgroundColor: "#f44336",
+            color: "#fff",
             border: "none",
             borderRadius: "50%",
             width: "2rem",
             height: "2rem",
             cursor: "pointer",
+            fontWeight: "bold",
           }}
         >
           X
         </button>
-        {/* Render either HTML content for Word documents or a Blob URL for other files */}
+
+        {/* Download Button */}
+        {downloadFunction && (
+          <button
+            onClick={downloadFunction}
+            style={{
+              position: "absolute",
+              bottom: "1rem",
+              left: "50%",
+              transform: "translateX(-50%)",
+              padding: "0.75rem 1.5rem",
+              backgroundColor: "#4CAF50",
+              color: "#fff",
+              border: "none",
+              borderRadius: "5px",
+              cursor: "pointer",
+              fontWeight: "bold",
+              fontSize: "1rem",
+              boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
+              transition: "background-color 0.3s ease",
+            }}
+            onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = "#45a049")}
+            onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = "#4CAF50")}
+          >
+            Download
+          </button>
+        )}
+
+        {/* Render Content */}
         {documentHtml ? (
           <div
             style={{
               width: "100%",
-              height: "100%",
+              height: "calc(100% - 4rem)", // Adjust height to account for buttons
               overflowY: "auto",
               padding: "1rem",
-              backgroundColor: "white",
+              backgroundColor: "#f9f9f9",
             }}
             dangerouslySetInnerHTML={{ __html: documentHtml }}
           />
         ) : (
-          documentUri && <iframe src={documentUri} style={{ width: "100%", height: "100%" }} />
+          documentUri && (
+            <iframe
+              src={documentUri}
+              style={{
+                width: "100%",
+                height: "calc(100% - 4rem)", // Adjust height to account for buttons
+                border: "none",
+              }}
+            />
+          )
         )}
       </div>
     </div>

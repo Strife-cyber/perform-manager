@@ -1,12 +1,14 @@
 import { useState, ChangeEvent, FC } from 'react';
 
 interface TextFieldComponentProps {
-  inputType?: 'text' | 'file' | 'password' | 'email'; // Support multiple input types
+  inputType?: 'text' | 'file' | 'password' | 'email' | 'number'; // Support multiple input types
   width?: string; // Input width
   height?: string; // Input height
   placeholder?: string; // Placeholder text
-  value?: string; // Controlled input value
+  value?: string | number; // Controlled input value
   onChange?: (e: ChangeEvent<HTMLInputElement>) => void; // Change handler
+  min?: number;
+  max?: number;
 }
 
 const TextFieldComponent: FC<TextFieldComponentProps> = ({
@@ -16,6 +18,8 @@ const TextFieldComponent: FC<TextFieldComponentProps> = ({
   placeholder = 'Enter text',
   value,
   onChange,
+  min = 1,
+  max = 5
 }) => {
   const [imagePreview, setImagePreview] = useState<string | null>(null);
 
@@ -53,6 +57,8 @@ const TextFieldComponent: FC<TextFieldComponentProps> = ({
           transition: 'all 0.4s ease-in-out',
           position: 'relative',
         }}
+        min={min}
+        max={max}
         className="flashing-input"
         accept={inputType === 'file' ? '.jpg,.jpeg' : undefined} // Restrict file input to specific types
       />
