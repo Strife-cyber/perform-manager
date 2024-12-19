@@ -13,6 +13,7 @@ const RedirectionPage: React.FC = () => {
         <h1 className="title">Access Denied</h1>
         <p className="message">
           You are currently logged in as a guest or lack the necessary permissions to access this page.
+          Contact your admin to give you privileges
         </p>
         <button
           className="home-button"
