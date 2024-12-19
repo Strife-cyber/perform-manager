@@ -7,6 +7,7 @@
 import React, { useState } from "react";
 import NavigationBar from "./controller_components/navigation_bar";
 import PerformanceEvaluations from "./controller_components/performance_evaluations";
+import SupportManagement from "./controller_components/support_management";
 
 const ControllerDashboard: React.FC = () => {
   const [currentSection, setCurrentSection] = useState("evaluations");
@@ -18,7 +19,7 @@ const ControllerDashboard: React.FC = () => {
       case "feedback":
         return <div>Provide feedback and ratings on employee performance.</div>;
       case "documents":
-        return <div>Upload supporting documents (e.g., meeting notes, project reports).</div>;
+        return <SupportManagement/>;
       case "goals":
         return <div>Set goals and objectives for employees.</div>;
       default:

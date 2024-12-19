@@ -41,6 +41,7 @@ const StandardButton: React.FC<StandardButtonProps> = ({
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
+        fontFamily: 'Montaga'
       }}
     >
       {isHovered && (

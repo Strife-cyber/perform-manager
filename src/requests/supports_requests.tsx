@@ -1,6 +1,6 @@
-import axios from 'axios';
+import api from '../api';
 
-interface Support {
+export interface Support {
   id?: number; // Optional for new entries
   title: string;
   description: string;
@@ -12,7 +12,8 @@ const useSupport = () => {
   // Fetch all support entries
   const getAllSupports = async (): Promise<Support[]> => {
     try {
-      const response = await axios.get(`/supports`);
+      const response = await api.get('/supports');
+      console.log(response);
       return response.data;
     } catch (error) {
       console.error('Error fetching supports:', error);
@@ -23,7 +24,7 @@ const useSupport = () => {
   // Fetch a specific support entry by ID
   const getSupport = async (id: number): Promise<Support> => {
     try {
-      const response = await axios.get(`/support`, { params: { id } });
+      const response = await api.get(`/support`, { params: { id } });
       return response.data;
     } catch (error) {
       console.error('Error fetching support entry:', error);
@@ -34,7 +35,7 @@ const useSupport = () => {
   // Fetch the uploader of a specific support entry
   const getSupportUploader = async (id: number): Promise<any> => {
     try {
-      const response = await axios.get(`/supports/uploader`, { params: { id } });
+      const response = await api.get(`/supports/uploader`, { params: { id } });
       return response.data;
     } catch (error) {
       console.error('Error fetching uploader for support entry:', error);
@@ -45,7 +46,7 @@ const useSupport = () => {
   // Create a new support entry
   const createSupport = async (support: Support): Promise<Support> => {
     try {
-      const response = await axios.post(`/supports`, support);
+      const response = await api.post(`/supports`, {"title": support.title, "description": support.description, "path": support.path, "uploaded_by": support.uploaded_by});
       return response.data;
     } catch (error) {
       console.error('Error creating support entry:', error);
@@ -56,7 +57,7 @@ const useSupport = () => {
   // Update an existing support entry by ID
   const updateSupport = async (id: number, updatedSupport: Partial<Support>): Promise<Support> => {
     try {
-      const response = await axios.put(`/supports`, updatedSupport, {
+      const response = await api.put(`/supports`, updatedSupport, {
         params: { id },
       });
       return response.data;
@@ -69,7 +70,7 @@ const useSupport = () => {
   // Delete a support entry by ID
   const deleteSupport = async (id: number): Promise<{ message: string }> => {
     try {
-      const response = await axios.delete(`/supports`, { params: { id } });
+      const response = await api.delete(`/supports`, { params: { id } });
       return response.data;
     } catch (error) {
       console.error('Error deleting support entry:', error);

@@ -15,11 +15,15 @@ const useFile = () => {
     };
 
     // Download a file
-    const downloadFile = async (filename: string): Promise<File> => {
+    const downloadFile = async (filepath: string): Promise<File> => {
         try {
-            const response = await download.get(`/${filename}`, {
-                responseType: 'blob' // Ensures the file is downloaded as a blob
+            const response = await download.get('/', {
+                responseType: 'blob', // Ensures the file is downloaded as a blob
+                params: {
+                    'filepath': filepath
+                }
             });
+            console.log(response.data)
 
             return response.data;
         } catch (error) {
