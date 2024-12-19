@@ -40,7 +40,7 @@ const LandingHeader = () => {
       <div className="nav-icons" style={{ display: 'flex', justifyContent: 'space-between', fontSize: '16px', margin: isMobile ? '20px 0' : '0', padding: isMobile ? '0 40px':'0', width: isMobile? '100%': '25%' }}>
         <NavLink link='' placeholder='Home'/>
         <NavLink link='' placeholder='Features'/>
-        <NavLink link='' placeholder='About'/>
+        <NavLink link='https://www.cremincam.org/' placeholder='About'/>
       </div>
 
       {/* Actions: Icons + Login Button */}

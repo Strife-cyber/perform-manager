@@ -3,34 +3,51 @@ import TextFieldComponent from '../../components/text_field_component';
 import StandardButton from '../../components/standard_button';
 import useUser, { User } from '../../requests/user_requests';
 import { useNavigate } from 'react-router-dom';
+import { useAppContext } from '../../context/context';
+import { Toast } from '../../components/toast_component';
 
 const AuthPage: React.FC = () => {
   const navigate = useNavigate();
+  const { userId } = useAppContext();
   const [isLogin, setIsLogin] = useState(true);
   const [userData, setUserData] = useState<User>({
     name: '',
     email: '',
     password: ''
   });
-  const { register_user, login_user } = useUser();
+  const { register_user, login_user, get_role } = useUser();
 
   const toggleAuthMode = () => {
     setIsLogin((prev) => !prev);
   };
+
+  const goToDestination = async () => {
+    try {
+      const role = await get_role(userId);
+    
+      if (role == "controller") {
+        navigate('/dashboard')
+      } else if (role == "employee") {
+        navigate('/actions')
+      }
+    } catch (error) {
+      navigate('/profile')
+    }
+  }
 
   const register = async () => {
     const { name, email, password } = userData;
     if (name && email && password) {
       try {
         await register_user({ name, email, password });
-        alert('Registration successful!');
-        navigate('/dashboard');
+        Toast.success('Registration successful!');
+        goToDestination();
       } catch (error) {
-        alert('Error registering. Please try again.');
+        Toast.error('Error registering. Please try again.');
         console.error(error);
       }
     } else {
-      alert('Please fill in all fields.');
+      Toast.info('Please fill in all fields.');
     }
   };
 
@@ -39,14 +56,14 @@ const AuthPage: React.FC = () => {
     if (email && password) {
       try {
         await login_user(email, password);
-        alert('Login successful!');
-        navigate('/dashboard');
+        Toast.success('Login successful!');
+        goToDestination();
       } catch (error) {
-        alert('Error logging in. Please try again.');
+        Toast.error('Error logging in. Please check credentials & try again.')
         console.error(error);
       }
     } else {
-      alert('Please fill in all fields.');
+      Toast.info('Please fill in all fields.');
     }
   };
 
