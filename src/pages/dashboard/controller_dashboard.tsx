@@ -9,6 +9,7 @@ import NavigationBar from "./controller_components/navigation_bar";
 import PerformanceEvaluations from "./controller_components/performance_evaluations";
 import SupportManagement from "./controller_components/support_management";
 import Cookies from "js-cookie";
+import FeedbackPage from "./controller_components/feedback_page";
 
 const ControllerDashboard: React.FC = () => {
   // Retrieve the saved section from cookies, default to "evaluations"
@@ -26,7 +27,7 @@ const ControllerDashboard: React.FC = () => {
       case "evaluations":
         return <PerformanceEvaluations />;
       case "feedback":
-        return <div>Provide feedback and ratings on employee performance.</div>;
+        return <FeedbackPage/>;
       case "documents":
         return <SupportManagement />;
       case "goals":

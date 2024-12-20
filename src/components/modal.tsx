@@ -1,4 +1,4 @@
-const Modal = ({ show, onClose, children }: any) => {
+const Modal = ({ show, onClose, children, title }: any) => {
     if (!show) return null;
   
     return (
@@ -34,7 +34,7 @@ const Modal = ({ show, onClose, children }: any) => {
               marginBottom: "10px",
             }}
           >
-            <h2 style={{ margin: 0, fontSize: "22px", fontFamily: "Montaga" }}>Create Performance Evaluation Form</h2>
+            <h2 style={{ margin: 0, fontSize: "22px", fontFamily: "Montaga" }}>{title == null ? "Create Performance Evaluation Form" : title}</h2>
             <button
               onClick={onClose}
               style={{

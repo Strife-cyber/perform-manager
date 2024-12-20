@@ -17,9 +17,9 @@ const AuthPage: React.FC = () => {
   });
   const { register_user, login_user, get_role } = useUser();
 
-  const toggleAuthMode = () => {
-    setIsLogin((prev) => !prev);
-  };
+  // const toggleAuthMode = () => { Un comment for registration
+  //   setIsLogin((prev) => !prev);
+  // };
 
   const goToDestination = async () => {
     try {
@@ -123,12 +123,12 @@ const AuthPage: React.FC = () => {
             onClickFunction={isLogin ? login : register}
           />
 
-          <p style={styles.toggleText}>
+          {/*<p style={styles.toggleText}>
             {isLogin ? "Don't have an account?" : 'Already a member?'}
             <span style={styles.toggleLink} onClick={toggleAuthMode}>
               {isLogin ? ' Sign Up' : ' Login'}
             </span>
-          </p>
+          </p>  Uncomment this to add registration*/}
         </div>
       </div>
     </div>
