@@ -31,7 +31,7 @@ const PerformanceFormReview: React.FC<PerformanceFormReviewProps> = ({
   };
 
   return (
-    <div style={{ fontFamily: "Montaga" }}>
+    <div style={{ fontFamily: "Montaga", zIndex: 1000 }}>
       <StandardModal isOpen={isModalOpen} onClose={() => {setIsModalOpen(false); closeModal()}}>
         <h2 style={{ fontSize: '1.8rem', marginBottom: '1rem', color: '#333' }}>
           Review Form: {selectedForm.title}

@@ -91,13 +91,13 @@ const PerformanceFormCard: React.FC<PerformanceFormCardProps> = ({
         justifyContent: "space-between",
         cursor: "pointer",
         transition: "transform 0.3s ease, box-shadow 0.3s ease",
-        fontFamily: "Montaga",
+        fontFamily: "Montaga"
       }}
       onMouseEnter={(e) =>
         (e.currentTarget.style.transform = "scale(1.05) translateY(-5px)")
       }
       onMouseLeave={(e) =>
-        (e.currentTarget.style.transform = "scale(1) translateY(0)")
+        (e.currentTarget.style.transform = "none")
       }
       onClick={handleClick}
     >

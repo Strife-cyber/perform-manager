@@ -37,6 +37,7 @@ const DocumentViewer: React.FC<DocumentViewerProps> = ({
           borderRadius: "10px",
           boxShadow: "0 4px 8px rgba(0, 0, 0, 0.2)",
           overflow: "hidden",
+          zIndex: 1000
         }}
       >
         {/* Close Button */}

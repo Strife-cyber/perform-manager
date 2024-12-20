@@ -59,7 +59,7 @@ const SupportFormCard: React.FC<SupportFormCardProps> = ({
                 (e.currentTarget.style.transform = "scale(1.05) translateY(-5px)")
             }
             onMouseLeave={(e) =>
-                (e.currentTarget.style.transform = "scale(1) translateY(0)")
+                (e.currentTarget.style.transform = "none")
             }
             onClick={async () => { await fetchDocumentUri(form.path, setDocumentHtml, setDocumentUri); setOpenViewer(true) }}
         >
