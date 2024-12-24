@@ -3,7 +3,7 @@ import "./redirection_page.css";
 
 const RedirectionPage: React.FC = () => {
   return (
-    <div className="redirection-container">
+    <div className="redirection-container" style={{ fontFamily: "pacifico" }}>
       <div className="animated-shapes">
         <div className="circle"></div>
         <div className="triangle"></div>
