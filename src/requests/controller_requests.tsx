@@ -1,7 +1,8 @@
 import api from "../api";
+import { Employee } from "./employee_requests";
 import { Performance } from "./performance_requests";
 
-interface Controller {
+export interface Controller {
     id?: string;
     user_id: string;
     department?: string;
@@ -58,7 +59,7 @@ export const useController = () => {
         }
     };
 
-    const get_controller_employees = async (id: string): Promise<any[]> => {
+    const get_controller_employees = async (id: string): Promise<Employee[]> => {
         try {
             const response = await api.get('/controllers/employees', { params: { id } });
             if (response.status === 200) {
@@ -110,6 +111,19 @@ export const useController = () => {
         }
     };
 
+    const get_all_controllers = async (): Promise<Controller[]> => {
+        try {
+            const response = await api.get('/controllers')
+            if (response.status === 200) {
+                return response.data;
+            } else {
+                throw new Error('Failed to fetch all controllers')
+            }
+        } catch (error: any) {
+            throw new Error(`Get all controllers error: ${error.response?.data}`);
+        }
+    }
+
     return {
         add_controller,
         get_controller,
@@ -119,5 +133,6 @@ export const useController = () => {
         get_controller_performances,
         get_controller_goals,
         get_controller_supports,
+        get_all_controllers
     };
 };

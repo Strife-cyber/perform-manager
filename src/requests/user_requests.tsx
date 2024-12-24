@@ -3,6 +3,7 @@ import { useAppContext } from "../context/context";
 
 // User interface
 export interface User {
+    id?: string;
     name?: string;
     email: string;
     password: string;
@@ -124,20 +125,26 @@ const useUser = () => {
         try {
             const currentUser = id || userId;
             if (!currentUser) throw new Error("No user ID available for role.");
-
+    
             const response = await api.get('/users/role', {
                 params: { id: currentUser }
             });
-
-            if (response.status == 200) {
-                return response.data;
+    
+            if (response.status === 200) {
+                return response.data;  // Return role if found
             } else {
-                throw new Error("Failed to fetch user details.");
+                return {"role": null};
             }
-        } catch (error:any) {
+        } catch (error: any) {
+            if (error.response?.status === 404) {
+                // Handle case when no role is found (404)
+                console.log("No role assigned to this user.");
+                return null;  // Return null if no role exists
+            }
+            // Handle other errors
             throw new Error(`User fetch error: ${error.response?.data?.message || error.message}`);
         }
-    }
+    };    
 
     return { register_user, login_user, logout_user, user_status, get_user_profile, update_user, get_role };
 };

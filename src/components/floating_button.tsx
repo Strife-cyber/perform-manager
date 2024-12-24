@@ -26,7 +26,7 @@ const FloatingButton: React.FC<FloatingButtonProps> = ({
       onClick={onClick}
       title={title} // Hint on hover (tooltip)
       style={{
-        position: "absolute",
+        position: "fixed", // Use fixed to persist on scroll
         bottom: bottom,
         top: top,
         right: right,
@@ -47,7 +47,7 @@ const FloatingButton: React.FC<FloatingButtonProps> = ({
         cursor: "pointer",
         fontWeight: "bold", // Optionally make the plus sign bold
         fontFamily: "Arial, sans-serif", // Consistent font family
-        zIndex: "1000"
+        zIndex: "1000", // Ensure it appears above other elements
       }}
       onMouseEnter={(e: React.MouseEvent) => {
         (e.currentTarget as HTMLButtonElement).style.backgroundColor = hoverColor; // Change color on hover
