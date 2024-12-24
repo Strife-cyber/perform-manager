@@ -191,7 +191,7 @@ export const role = async (req, res) => {
 
         // If no role was found, return a 404 response
         if (role === null) {
-            return res.status(404).json({ message: "User not found or role not assigned" });
+            return res.status(202).json({ message: "User not found or role not assigned" });
         }
 
         // Return the found role
