@@ -23,7 +23,7 @@ export default class EmailService {
     async sendEmail(to, subject, html) {
         try {
             const info = await this.transporter.sendMail({
-                from: this.transporter.options.auth.user, // Sender's email address
+                from: `"Perform Manager" <${this.transporter.options.auth.user}>`, // Sender's email address
                 to, // Recipient's email address
                 subject, // Subject of the email
                 html, // HTML content
