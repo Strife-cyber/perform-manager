@@ -6,9 +6,13 @@ import { useNavigate } from 'react-router-dom';
 import { useAppContext } from '../../context/context';
 import { Toast } from '../../components/toast_component';
 
+function delay(ms: number) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
 const AuthPage: React.FC = () => {
   const navigate = useNavigate();
-  const { userId } = useAppContext();
+  const { getUpdate } = useAppContext();
   const [isLogin, setIsLogin] = useState(true);
   const [userData, setUserData] = useState<User>({
     name: '',
@@ -23,7 +27,10 @@ const AuthPage: React.FC = () => {
 
   const goToDestination = async () => {
     try {
-      const role = await get_role(userId);
+      await delay(3000);
+      console.log(getUpdate());
+      const role = await get_role(getUpdate());
+      console.log(role)
     
       if (role.role == "controller") {
         console.log('i am here')
@@ -37,6 +44,7 @@ const AuthPage: React.FC = () => {
         navigate('/dashboard')
       }
     } catch (error) {
+      console.log(error)
       navigate('/profile')
     }
   }

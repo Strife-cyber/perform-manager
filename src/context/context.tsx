@@ -5,6 +5,7 @@ interface ContextFunctions {
     userId: string | null;
     login: (id: string) => void;
     logout: () => void;
+    getUpdate: () => string;
 }
 
 const AppContext = createContext<ContextFunctions | undefined>(undefined);
@@ -43,8 +44,12 @@ export const AppProvider: React.FC<AppProviderProps> = ({ children }) => {
         Cookies.remove("userId");
     };
 
+    const getUpdate = () => {
+        return Cookies.get("userId")!;
+    };
+
     // Memoize context value to avoid unnecessary re-renders
-    const contextValue = useMemo(() => ({ userId, login, logout }), [userId]);
+    const contextValue = useMemo(() => ({ userId, login, logout, getUpdate }), [userId]);
 
     return <AppContext.Provider value={contextValue}>{children}</AppContext.Provider>;
 };
