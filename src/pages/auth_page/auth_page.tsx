@@ -25,10 +25,16 @@ const AuthPage: React.FC = () => {
     try {
       const role = await get_role(userId);
     
-      if (role == "controller") {
+      if (role.role == "controller") {
+        console.log('i am here')
         navigate('/dashboard')
-      } else if (role == "employee") {
+      } else if (role.role == "employee") {
+        console.log('i am here 2')
         navigate('/actions')
+      } else if (role.role == "admin") {
+        navigate('/admin')
+      } else {
+        navigate('/dashboard')
       }
     } catch (error) {
       navigate('/profile')

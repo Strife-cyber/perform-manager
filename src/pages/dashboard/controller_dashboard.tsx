@@ -10,6 +10,7 @@ import PerformanceEvaluations from "./controller_components/performance_evaluati
 import SupportManagement from "./controller_components/support_management";
 import Cookies from "js-cookie";
 import FeedbackPage from "./controller_components/feedback_page";
+import GoalPage from "./controller_components/goals_page";
 
 const ControllerDashboard: React.FC = () => {
   // Retrieve the saved section from cookies, default to "evaluations"
@@ -31,7 +32,7 @@ const ControllerDashboard: React.FC = () => {
       case "documents":
         return <SupportManagement />;
       case "goals":
-        return <div>Set goals and objectives for employees.</div>;
+        return <GoalPage/>;
       default:
         return <div>Select a section to get started.</div>;
     }

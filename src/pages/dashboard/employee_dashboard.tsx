@@ -11,6 +11,7 @@ import Cookies from "js-cookie";
 import ReviewEvaluationForms from "./employee_components/review_evaluation_forms";
 import NavigationBar from "./employee_components/navigation_bar";
 import OtherDocuments from "./employee_components/other_documents";
+import EmployeeGoalsPage from "./employee_components/action_plans";
 
 const EmployeeDashboard: React.FC = () => {
     const [currentSection, setCurrentSection] = useState(() => 
@@ -26,7 +27,7 @@ const EmployeeDashboard: React.FC = () => {
             case "evaluation-forms":
                 return <ReviewEvaluationForms/>
             case "action-plans":
-                return <div>Provide action plans and see goals set in place</div>
+                return <EmployeeGoalsPage/>
             case "personal-progress":
                 return <div>Track personal progress i don't know how</div>
             case "other-documents":

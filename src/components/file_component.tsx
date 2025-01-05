@@ -39,6 +39,7 @@ const FileComponent: React.FC<FileComponentProps> = ({ onFilesUploaded }) => {
       className="filemanager-container card"
       onDrop={handleDrop}
       onDragOver={handleDragOver}
+      style={{ cursor: "pointer" }}
     >
       <div className="fm-content-wrapper">
         <div className="fp-content">
