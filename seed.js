@@ -66,7 +66,7 @@ import models from "./models/index.js";
 
     // Create a single admin
     const admin = await models.Admin.create({
-      user_id: users[51].id,
+      user_id: users[users.length - 1].id,
       privileges: "CRUD"
     })
 

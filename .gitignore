@@ -1,3 +1,4 @@
 /node_modules
 /uploads
 perform.sqlite
+user_credentials.json
