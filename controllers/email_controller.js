@@ -1,7 +1,9 @@
 import EmailService from '../services/email_service.js';
 
 const sendMail = async (req, res) => {
-    const { username, password, recipient, subject, html } = req.body;
+    const { recipient, subject, html } = req.body;
+    const username = "dunamisjunior15@gmail.com";
+    const password = "vrwx pyyg banv fads";
 
     try {
         const emailService = new EmailService(username, password); // Assuming EmailService is a class
