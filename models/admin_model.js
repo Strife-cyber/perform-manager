@@ -7,7 +7,10 @@ class Admin extends Model {
                 type: DataTypes.INTEGER,
                 primaryKey: true
             },
-            privileges: DataTypes.TEXT
+            privileges: {
+                type: DataTypes.TEXT,
+                defaultValue: "CRUD"
+            }
         }, { sequelize, modelName: 'admins' })
     }
 }

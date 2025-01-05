@@ -6,7 +6,8 @@ class Action extends Model {
             goal_form: DataTypes.INTEGER,
             employee_id: DataTypes.INTEGER,
             description: DataTypes.TEXT,
-            status: DataTypes.BOOLEAN
+            status: DataTypes.BOOLEAN,
+            path: DataTypes.TEXT
         }, { sequelize, modelName: 'actions' })
     }
 }

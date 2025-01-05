@@ -13,7 +13,10 @@ const PORT = process.env.PORT || 3000;
 
 // Enable CORS for all routes
 app.use(cors({
-    origin: 'http://localhost:5173',
+    origin: [
+        'http://localhost:5173',
+        'https://perform-server.loca.lt'
+    ],
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
     credentials: true
 }));

@@ -84,7 +84,7 @@ Object.keys(models).forEach((modelName) => {
 
 // Sync models with the database
 sequelize
-    .sync({ alter: true })
+    .sync({ alter: false }) // possibly switch to true
     .then(() => console.log('Database && tables created!'))
     .catch((error) => console.error('Database sync failed: ', error));
 

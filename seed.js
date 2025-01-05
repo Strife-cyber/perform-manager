@@ -13,7 +13,7 @@ import models from "./models/index.js";
     const userCredentials = []; // Array to store email and password for the JSON file
 
     // Create Users (50)
-    for (let i = 0; i < 50; i++) {
+    for (let i = 0; i < 51; i++) {
       const email = faker.internet.email();
       const password = faker.internet.password();
       const hashedPassword = await bcrypt.hash(password, 10);
@@ -63,6 +63,12 @@ import models from "./models/index.js";
         employeeUserIndex++;
       }
     }
+
+    // Create a single admin
+    const admin = await models.Admin.create({
+      user_id: users[51].id,
+      privileges: "CRUD"
+    })
 
     // Create Performance Forms (40)
     // Each Controller assigns 1 form to each of their 4 employees
