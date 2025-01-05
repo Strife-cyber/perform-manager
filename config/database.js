@@ -10,7 +10,7 @@ const sequelize = new Sequelize({
     dialect: 'sqlite',
     storage: './perform.sqlite',
     logging: false
-}); // comment this if you are using posgresql
+}); // comment this if you are using posgresql to use this also install sqlite3
 
 
 export default sequelize;
