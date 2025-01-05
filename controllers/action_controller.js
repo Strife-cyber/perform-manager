@@ -92,13 +92,14 @@ export const getActionEmployee = async (req, res) => {
 
 // Create a new action
 export const createAction = async (req, res) => {
-    const { goal_form, employee_id, description, status } = req.body;
+    const { goal_form, employee_id, description, status, path } = req.body;
     try {
         const action = await models.Action.create({
             goal_form,
             employee_id,
             description,
             status,
+            path
         });
         res.status(201).json(action);
     } catch (error) {
@@ -110,13 +111,13 @@ export const createAction = async (req, res) => {
 // Update an action by ID
 export const updateAction = async (req, res) => {
     const { id } = req.query;
-    const { goal_form, employee_id, description, status } = req.body;
+    const { goal_form, employee_id, description, status, path } = req.body;
     try {
         const action = await models.Action.findByPk(id);
         if (!action) {
             return res.status(404).json({ message: 'Action Form not found' });
         }
-        await action.update({ goal_form, employee_id, description, status });
+        await action.update({ goal_form, employee_id, description, status, path });
         res.json(action);
     } catch (error) {
         console.error('Error updating action:', error);
